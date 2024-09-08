@@ -1,0 +1,73 @@
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308\lab-1-initial-setup-SUPERINTIALD> docker compose up -d
+[+] Running 15/15
+ ✔ db 14 layers [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                                                        14.7s 
+   ✔ 2f44b7a888fa Pull complete                                                                                                                                                                 4.0s 
+   ✔ e2ab7b7507be Pull complete                                                                                                                                                                 0.4s 
+   ✔ 08eba411caa3 Pull complete                                                                                                                                                                 1.5s 
+   ✔ 100bc654a5e4 Pull complete                                                                                                                                                                 1.3s 
+   ✔ 79f317c402ed Pull complete                                                                                                                                                                 3.5s 
+   ✔ da33959ecdf4 Pull complete                                                                                                                                                                 2.5s 
+   ✔ 2ab35e615a89 Pull complete                                                                                                                                                                 3.2s 
+   ✔ 037064cd96ec Pull complete                                                                                                                                                                 3.5s 
+   ✔ 70fa2242f609 Pull complete                                                                                                                                                                 7.8s 
+   ✔ 4bec7ae19ef2 Pull complete                                                                                                                                                                 3.9s 
+   ✔ 2c2443a45c46 Pull complete                                                                                                                                                                 4.2s 
+   ✔ 326fd7e1c69e Pull complete                                                                                                                                                                 4.3s 
+   ✔ 2215c9c253b7 Pull complete                                                                                                                                   
+                              4.5s
+   ✔ e636426454d9 Pull complete                                                                                                                                   
+                              4.7s
+[+] Building 0.0s (0/0)                                                                                                                                                               docker:default
+[+] Running 4/4
+ ✔ Network lab-1-initial-setup-superintiald_default     Created                                                                                                   
+                              0.1s
+ ✔ Volume "lab-1-initial-setup-superintiald_lab-01-db"  Created                                                                                                   
+                              0.0s
+ ✔ Container lab-1-initial-setup-superintiald-db-1      Started                                                                                                   
+                              0.6s
+ ✔ Container lab-1-initial-setup-superintiald-web-1     Started                                                                                                   
+                              0.1s
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308\lab-1-initial-setup-SUPERINTIALD> docker compose ps
+NAME                                     IMAGE         COMMAND                  SERVICE   CREATED          STATUS          PORTS
+lab-1-initial-setup-superintiald-db-1    postgres:14   "docker-entrypoint.s…"   db        16 seconds ago   Up 14 seconds   5432/tcp
+lab-1-initial-setup-superintiald-web-1   node:lts      "docker-entrypoint.s…"   web       15 seconds ago   Up 14 seconds   0.0.0.0:3000->4000/tcp
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308\lab-1-initial-setup-SUPERINTIALD> docker compose exec db psql -U postgres
+>>
+>>
+psql (14.10 (Debian 14.10-1.pgdg120+1))
+Type "help" for help.
+
+postgres=# CREATE DATABASE practicedb;
+CREATE DATABASE
+postgres=# \c practicedb;
+You are now connected to database "practicedb" as user "postgres".
+practicedb=# CREATE TABLE
+  IF NOT EXISTS store(
+    id SERIAL,
+    product_name VARCHAR(40) NOT NULL,
+    qty INTEGER NOT NULL,
+    price FLOAT NOT NULL,
+    PRIMARY KEY (id)
+  );
+
+INSERT INTO
+  store (product_name, qty, price)
+VALUES
+  ('apple', 10, 1),
+  ('pear', 5, 2),
+  ('banana', 10, 1.5),
+  ('lemon', 100, 0.1),
+  ('orange', 50, 0.2);
+CREATE TABLE
+INSERT 0 5
+practicedb=# SELECT * FROM store;
+ id | product_name | qty | price
+----+--------------+-----+-------
+  1 | apple        |  10 |     1
+  2 | pear         |   5 |     2
+  3 | banana       |  10 |   1.5
+  4 | lemon        | 100 |   0.1
+  5 | orange       |  50 |   0.2
+(5 rows)
+
+practicedb=# \q

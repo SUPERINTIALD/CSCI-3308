@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Calendar</title>
+    <!-- @TODO: Include all external resources - Bootstrap libraries, script.js and style.css -->
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"/>
+    <!-- Bootstrap JS library -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+    <!-- Bootstrap icons library -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+
+    <script src="./resources/js/script.js"></script>
+    <!-- Replace file.css with the appropriate path to style.css. Please use relative paths -->
+    <link rel="stylesheet" href="./resources/css/style.css" />
+
+  </head>
+    <body onload="initializeCalendar()">
+    <div class=".container">
+      <div id="calendar" class="row"></div>
+    </div>
+    <div class="modal" tabindex="-1" id="event-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <form>
+              <h5 class="modal-title" id="modal-title" style="margin: 10px;"> Modal Title</h5>
+              <div class="row" style="margin:10px">
+                <div class="col-md-3">
+                    <label class="form-label" >Name </label>
+                </div>
+
+                <div class="col-md-3">
+
+                  <input type = 'textbox' id ="event_name" placeholder = 'Event Name' required>
+                  <div class="valid-feedback"> Looks Good!</div>
+                  <div class="invalid-feedback">Please Fill the Event Name Out.</div>
+                </div>
+              </div>
+
+              
+              <div class="row" style="margin:10px">
+                <div class="col-md-3">
+                    <label class="form-label"> Weekday                  </label>
+                </div>
+                <div class="col-md-3">
+                    <select id="event_weekday" name="Weekday" required>
+                      <option selected disabled value="">Select a Weekday</option>
+                      <option value="sunday">Sunday</option>
+                      <option value="monday">Monday</option>
+                      <option value="tuesday">Tuesday</option>
+                      <option value="wednesday">Wednesday</option>
+                      <option value="thursday">Thursday</option>
+                      <option value="friday">Friday</option>
+                      <option value="saturday">Saturday</option>
+                    </select>
+
+                    <div class="valid-feedback"> Looks Good!</div>
+                    <div class="invalid-feedback">Please Choose One Option.</div>
+                </div>
+                </div>
+
+                <div class="row" style="margin:10px">
+                  <div class="col-md-3">
+                    <label class="form-label"> Time                    </label>
+                  </div>
+                    <div class="col-md-3">
+
+                      <input type="time" id="event_time" placeholder="12:00" required>
+                  
+                    <div class="valid-feedback"> Looks Good!</div>
+                    <div class="invalid-feedback">Choose One of the Options.</div>
+                  </div>
+                </div>
+                
+                <!-- Modality -->
+                <div class="row" style="margin:10px">
+                  <div class="col-md-3">
+                  <label class="form-label"> Modaility</label>
+                  </div>
+
+                  <div class="col-md-3">
+                    
+                    <select id="event_modality" required onchange="updateLocationOptions(this.value)">
+                      <option selected disabled value="" >Select a Modality</option>
+                      <option value="in-person">In Person</option>
+                      <option value="remote">Remote</option>
+                    </select> 
+                    <div class="valid-feedback"> Looks Good!</div>
+                    <div class="invalid-feedback">Choose One of the Options.</div>
+                  </div>
+                </div>
+                <!-- Location -->
+                <!-- Remote URL -->
+
+                <div class="row" style="margin:10px">
+                  <div class="col-md-3">
+                    <!-- Switch btwn Location/Remote URL -->
+                    <label  style="display: none;"id="locationLabel" for="event_location"> Location</label>
+                    <label class="form-label" style="display:none;" id="remoteLabel" for="event_remote_url"> Remote URL</label>
+                  </div>
+                  <div class="col-md-3">
+                    <input type='textbox' id="event_location" placeholder='Event Location' style="display: none">
+                    <input type="textbox" id="event_remote_url" placeholder="https://www.google.com"  pattern='^(ftp|http|https):\/\/[^ "]+(\.[^ "]+)+$'  style="display: none">
+                  </div>
+                </div>
+                <!-- Attendees -->
+                <div class="row" style="margin:10px">
+                  <div class="col-md-3">
+                    <label class="form-label"> Attendees </label>
+                  </div>
+                  <div class="col-md-3">
+
+                    <input type="textbox" id="event_attendees" placeholder = "Larry, Bobby, etc." required>
+                    <div class="valid-feedback"> Looks Good!</div>
+                    <div class="invalid-feedback">Please put at least one Attendees.</div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button id="close" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button id="submit_button" class="btn btn-primary" type="submit">
+                    Submit
+                  </button>
+                </div>
+            </form>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

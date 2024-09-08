@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betting History</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3d619b;
+    background-size: cover;
+    background-position: bottom;
+    background-image: url('https://images.pexels.com/photos/2277978/pexels-photo-2277978.jpeg?cs=srgb&dl=pexels-king-siberia-2277978.jpg&fm=jpg');
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 80px auto;
+  }
+
+  .form-container, .history-container {
+    background-color: #e9e9ebe4;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid #3d619b;
+    margin-bottom: 40px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #c7c7c7;
+  }
+
+  .btn {
+    background-color: #ffda5f;
+    color: #121212;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: #ffda5f;
+  }
+
+  label {
+    margin-top: 10px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    color: #121212;
+  }
+
+  .form-control:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.25);
+  }
+
+  .won {
+  background-color: #90EE90; /* light green */
+}
+
+  .lost {
+  background-color: #ef4b4c; /* tomato red */
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container">
+    <h2 style="color: #ef4b4c">Add Past Bet</h2>
+    <form id="bet-form" method="POST" action="/bets">
+
+      <div class="mb-3">
+        <label for="event">Event/Sport</label>
+        <select id="event" name="event" class="form-control">
+          {{#each sports}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="event">Broker</label>
+        <select id="broker" name="broker" class="form-control">
+          {{#each brokers}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+        <div class="mb-3 d-flex justify-content-between">
+          <div class="mr-2" style="flex: 1;">
+            <label for="amount">Bet Amount</label>
+            <input type="number" id="amount" name="amount" class="form-control">
+          </div>
+          <div class="ml-2" style="flex: 1;">
+            <label for="odds">Odds</label>
+            <div class="d-flex">
+              <button id="odds-sign-button" class="btn btn-primary mr-2">+</button>
+              <input type="hidden" id="odds_sign" name="odds_sign" value="+">
+              <input type="number" id="odds" name="odds" class="form-control">
+            </div>
+          </div>
+        </div>
+
+      <div class="mb-3">
+        <label for="outcome">Outcome</label>
+        <select id="outcome" name="outcome" class="form-control">
+          <option value="won">Won</option>
+          <option value="lost">Lost</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Submit Bet</button>
+    </form>
+  </div>
+
+<div class="history-container">
+  <h2>Betting History</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Sport / Event</th>
+        <th>Broker</th>
+        <th>Amount</th>
+        <th>Odds</th>
+        <th>Profit / Loss</th>
+      </tr>
+    </thead>
+    <tbody style="color: #fff">
+      {{#each bets}}
+        <tr class="{{rowClass this.profit}}">
+          <td>{{formatDate this.datetime}}</td>
+          <td>{{this.sport_name}}</td>
+          <td>{{this.broker_name}}</td>
+          <td>${{this.stake}}</td>
+          <td>{{formatOdds this.odds}}</td>
+          <td>${{this.profit}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+</div>
+
+<script>
+  // Get the sport selection dropdown
+  const sportSelect = document.getElementById('event');
+
+  // Listen for changes on the sport selection dropdown
+  sportSelect.addEventListener('change', async function() {
+    // Get the selected sport
+    const selectedSport = sportSelect.value;
+
+    // Make a request to the server to get the image URL
+    const response = await fetch(`/api/sport-images?name=${encodeURIComponent(selectedSport)}`);
+    const data = await response.json();
+    const imageUrl = data.imageUrl;
+
+    // Update the background image
+    document.body.style.backgroundImage = `url('${imageUrl}')`;
+  });
+
+
+
+document.getElementById('odds-sign-button').addEventListener('click', function(event) {
+  event.preventDefault();
+  const newSign = this.textContent === '+' ? '-' : '+';
+  this.textContent = newSign;
+  document.getElementById('odds_sign').value = newSign;
+});
+</script>
+</body>
+</html>

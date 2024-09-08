@@ -1,0 +1,53 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <a class="navbar-brand" href="/"></a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <!-- TODO: For 'Home', Add a <a> tag with class="nav-link" and href='/' API that navigates to home page if logged in, or login page if not -->
+            {{!-- {{#if isLoggedIn}} --}}
+                <a class="nav-link" href="/">Home</a>
+            {{!-- {{else}} --}}
+                {{!-- <a class="nav-link" href="/">Home</a> --}}
+            {{!-- {{/if}} --}}
+        </li>
+        <li class="nav-item">
+          <!-- TODO: For 'Courses', Add a <a> tag with class="nav-link" and href='/courses' API that navigates to courses page if logged in, or login page if not -->
+            {{!-- {{#if isLoggedIn}} --}}
+                {{!-- <a class="nav-link" href="/">Home</a> --}}
+            {{!-- {{#if isLoggedIn}} --}}
+                <a class="nav-link" href="/courses">Courses</a>
+            {{!-- {{else}} --}}
+                {{!-- <a class="nav-link" href="/">Courses</a> --}}
+            {{!-- {{/if}} --}}
+            
+            {{!-- {{else}} --}}
+            {{!-- <a class="nav-link" href="/login">Home</a> --}}
+            {{!-- {{/if}} --}}
+
+        </li>
+        <li class="nav-item">
+          <!-- TODO: For 'Log out', Add a <a> tag with class="nav-link" and href='/logout' API that navigates to the logout page -->
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="navbar-collapse collapse order-3 dual-collapse2">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <!-- TODO: Add the email id which is passed using: {{ variable_name }}. This will display the email id on the top right corner of the page -->
+              {{!-- {{#if isLoggedIn}} --}}
+
+              <a class="nav-link" href="#">
+              
+              {{email}}
+              {{!-- {{else}} --}}
+                {{!-- <a class="nav-link" href="/login"></a> --}}
+              {{!-- {{/if}} --}}
+              </a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+</header>

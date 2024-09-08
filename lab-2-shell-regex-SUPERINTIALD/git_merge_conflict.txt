@@ -1,0 +1,37 @@
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git commit -m "Version - Yuri1 : 1" 
+[Yuri1 9644e6b] Version - Yuri1 : 1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git push --set-upstream origin Yuri1    
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git checkout main
+>>
+Switched to branch 'main'
+Your branch is behind 'origin/main' by 7 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git pull
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git checkout main
+>>
+Switched to branch 'main'
+Your branch is behind 'origin/main' by 7 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git pull
+
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git merge main
+Auto-merging main.cpp
+CONFLICT (content): Merge conflict in main.cpp
+Automatic merge failed; fix conflicts and then commit the result.
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git add main.cpp
+>>
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git commit -m "Merging changes with return value 1"
+>>
+[Yuri1 fa8dcde] Merging changes with return value 1
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem 2 2023)\CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20> git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 370 bytes | 370.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:CU-CSCI3308-Spring2024/lab-2-git-recitation-16-team-20.git
+   9644e6b..fa8dcde  Yuri1 -> Yuri1
+PS D:\Yuri\CU Boulder Bachelor's\Current (Sophmore Sem        \CSCI 3308 (SoftDef)\lab-2-git-recitation-16-team-20>

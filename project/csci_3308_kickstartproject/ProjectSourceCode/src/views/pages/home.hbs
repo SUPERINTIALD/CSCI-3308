@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportSphere</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  /* Basic Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E9E9EB;
+    color: #fff;
+    line-height: 1.6;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+  }
+
+  header {
+    background: #0077B6;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #027BCE 3px solid;
+  }
+
+  header a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+
+  .main-banner {
+    background: url('banner-image.jpg') no-repeat center center/cover;
+    height: auto;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 50px 20px; /* Add some padding */
+  }
+
+  .main-banner h1 {
+    font-size: 4rem; /* Make the font size larger */
+    margin-bottom: 0.5rem; /* Adjust spacing */
+    font-weight: bold; /* Optional: makes text bolder */
+    
+    color: #ef4b4c;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the feature boxes */
+    gap: 20px; /* Space between boxes */
+    margin-top: -40px; /* Space from the top content */
+  }
+
+  .feature-box {
+    position: relative;
+    width: 300px; /* Minimum width so they don't get too small */
+    background: #fff;
+    min-height: 75px;
+    border-radius: 10px; /* Rounded corners for aesthetics */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* More pronounced shadow for depth */
+    text-align: center; /* Center text */
+    margin-bottom: 20px;
+  }
+  .feature-box h2 {
+    position: absolute;
+    top: 0;
+    width: 300px;
+    height: 75px;
+    background: #3d619b;
+    font-size: 1.75rem; /* Larger heading size */
+    color: #fff; /* Gold color for emphasis */
+    margin-bottom: 1rem; /* Adjust spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+  .centered-text{
+    position: absolute;
+    top: 60%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    color: #000;
+  }
+
+
+  .stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+ .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 30px;
+    padding-bottom: 70px;
+
+  }
+  .grid-item {
+    padding: 20px;
+    border: 3px solid #ef4b4c;
+    text-align: center;
+    background-color: #fff;
+  }
+  .grid-item h2{
+    color:#173f74;
+    font-size: 1.5rem;
+  }
+  .grid-text{
+    color:#000;
+    font-size: 1.5rem;
+  }
+
+.card-body {
+  height: 20%;
+}
+  /* Responsive Grid */
+  @media(max-width: 700px) {
+    .features {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>
+
+</head>
+<body>
+
+
+<div class="main-banner">
+    <h1>WELCOME TO SPORTSPHERE, {{username}}!</h1>
+    <p style="color: #000000; font-size: 1.2rem; font-weight: bold; text-transform: uppercase;">Your ultimate sports betting companion</p>
+</div>
+
+
+<section class="container features">
+    <div class="feature-box">
+        <a href="/nfl" >
+            <h2>Sports</h2>
+        </a>
+        {{!-- <p class="centered-text">Find all relevant facts for your betting decisions.</p> --}}
+    </div>
+    <div class="feature-box">
+        <a href="/bets"> 
+            <h2>Track your history</h2>
+        </a>
+        {{!-- <p class="centered-text">Easily log your bets to keep track of your important betting statistics</p> --}}
+    </div>
+    <div class="feature-box">
+        <a href="/community"> 
+            <h2>Community</h2>
+        </a>
+        {{!-- <p class="centered-text">Find articles relevant to the sports betting scene</p> --}}
+    </div>
+</section>
+
+<div>
+  <h2 class="text-center mb-4" style="padding-top: 10px; color:#3d619b; "><strong>Top Stats</strong></h2>
+</div>
+
+  {{#gt all_time_bets 0}}
+  <div class="grid-container">
+    <div class="grid-item">
+      <h2>Profit - Last 30 Days</h2>
+      <p class="grid-text"> {{monthly_profit}}</p>
+    </div>
+    <div class="grid-item">
+      <h2># of Bets Placed - Last 30 days</h2>
+      <p class="grid-text">{{monthly_bets}}</p>
+    </div>
+    <div class="grid-item">
+      <h2># of All Time Bets</h2>
+      <p class="grid-text">{{all_time_bets}}</p>
+    </div>
+    <div class="grid-item">
+      <h2>All Time Profit</h2>
+      <p class="grid-text">${{all_time_profit}}</p>
+    </div>
+    <div class="grid-item">
+      <h2>Top Sports</h2>
+      <p class="grid-text">{{top_sports.sport_name}}: ${{top_sports.total_profit}}</p>
+    </div>
+    <div class="grid-item">
+      <h2>Win Rate</h2>
+      <p class="grid-text">{{win_rate}}%</p>
+    </div>
+  </div>
+{{else}}
+  <div class="center-card">
+    <a href="/bets">Track a bet to see statistics!</a>
+  </div>
+
+  <style>
+  .center-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+  }
+  </style>
+{{/gt}}
+
+</section>
+
+
+
+</body>
+</html>

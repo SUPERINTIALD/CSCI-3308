@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports Page</title>
+<style>
+  /* Reset margins and padding for a clean layout */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Basic styles for consistent font and background */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212; /* Dark background for contrast */
+    color: #ffffff; /* Light text color for readability */
+    line-height: 1.6;
+  }
+
+  /* Wrapper to hold sidebar and content */
+  .wrapper {
+    display: flex;
+    margin-top: 45px;
+  }
+
+  /* Sidebar styling */
+  .sidebar {
+    background-color: #023E8A; /* Dark blue to match section colors */
+    min-width: 250px;
+    max-width: 300px;
+    height: 100vh;
+    padding: 20px;
+    margin-top: 300;
+  }
+
+  .sidebar ul {
+    list-style-type: none;
+  }
+
+  .sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+  }
+
+  .sidebar ul li a:hover {
+    background-color: #FFD700; /* Gold color for hover effect */
+  }
+
+  /* Main content area */
+  .container {
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+  }
+
+  .event {
+    background: #023E8A;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .bookmakers {
+    margin-top: 10px;
+  }
+
+  .bookmaker {
+    background: #0177B6; /* Lighter blue for contrast */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  /* Table styling for clarity */
+  .odds-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .odds-table th, .odds-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .odds-table th {
+    background: #0077B6;
+    color: #FFD700;
+  }
+
+  /* Responsive design adjustments */
+  @media(max-width: 900px) {
+    .wrapper {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+
+    .container {
+      margin-left: 0;
+    }
+
+    .main-content {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <nav class="sidebar">
+    <ul>
+      <li><a href="/nfl">NFL</a></li>
+      <li><a href="/nba">NBA</a></li>
+      <li><a href="/ufc">UFC</a></li>
+      <!-- Additional sports links can be added here -->
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Upcoming NFL Events</h1>
+
+    {{#each events}}
+    <div class="event">
+      <h2>{{home_team}} vs. {{away_team}}</h2>
+      <p>Commence Time: <span class="commence-time">{{commence_time}}</span></p>
+      <div class="bookmakers">
+        {{#each bookmakers}}
+        <div class="bookmaker">
+          <h3>Bookmaker: {{title}}</h3>
+          {{#each markets}}
+          <div class="{{key}}">
+            <h4>Market: {{key}}</h4>
+            <table class="odds-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each outcomes}}
+                <tr>
+                  <td>{{name}}</td>
+                  <td>{{price}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+          {{/each}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+
+<script>
+  // This function will convert an ISO 8601 timestamp to a more readable format.
+  function formatTimestamp(isoStr) {
+    const date = new Date(isoStr);
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' };
+    return date.toLocaleString('en-US', options);
+  }
+
+  // This function will find all elements with the 'commence-time' class and format their content.
+  function formatCommenceTimes() {
+    const timeElements = document.querySelectorAll('.commence-time');
+    timeElements.forEach((elem) => {
+      elem.textContent = formatTimestamp(elem.textContent);
+    });
+  }
+
+  // Run the function after the window loads.
+  window.onload = formatCommenceTimes;
+</script>
+
+</body>
+</html>
